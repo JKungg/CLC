@@ -3,6 +3,62 @@
 #include <ctype.h>
 #include <math.h>
 
+int binaryOperation(char operator, float num1, float num2){
+    switch(operator){
+        case '+' :
+            // Calculate sum and print it.
+            printf("The result is %f", (num1+num2));
+            break;
+
+        case '-' :
+            // Calculate subtraction and print it.
+            printf("The result is %f", (num1-num2));
+            break;
+
+        case '*' :
+            // Calculate product and print it.
+            printf("The result is %f", (num1*num2));
+            break;
+
+            // Calculate Quotient and print it
+        case '/' :
+            // Must make sure it is not trying to be divided by 0.
+            if(num2!=0.00){
+                printf("The result is %f", (num1/num2));
+                break;
+            } else{
+                printf("You cannot divide by 0!");
+                break;
+            }
+            // Calculate Remainder
+        case '%':
+            printf("The result is %f", remainderf(num1,num2));
+            break;
+
+            // Calculate Power
+        case 'P':
+            printf("The result is %f", pow(num1,num2));
+            break;
+
+            // Calculate Maximum
+        case 'X':
+            printf("The result is %f", fmaxf(num1,num2));
+            break;
+
+            // Calculate Minimum
+        case 'I':
+            printf("The result is %f", fminf(num1,num2));
+            break;
+
+            // Default case if user doesn't select one of the operators available.
+        default :
+            printf("\nSorry I don't have enough knowledge to serve you at this time.");
+    }
+}
+
+
+float a,b,c,d,e;
+
 int main() {
     // Declare Variables for - Developer Name and UserInput
     char name[20];
@@ -16,7 +72,6 @@ int main() {
     printf("Version: 1\n");
     printf("Date: 2022-09-26\n");
     printf("----------------------------------------------------------\n\n");
-
     // Calculator Main Menu
     printf("Select one of the following items:\n"
            "B) - Binary Mathematical Operations, such as addition and subtraction.\n"
@@ -41,7 +96,6 @@ int main() {
             // Declare required variables
             float num1, num2;
             char operator;
-
             printf("Please enter the first number:");
             // Read num1
             scanf("%f", &num1);
@@ -52,57 +106,9 @@ int main() {
             // Read num2
             scanf("%f", &num2);
 
-            // Switch case for the 4 types of possible operations
-            switch(operator){
-                case '+' :
-                    // Calculate sum and print it.
-                    printf("The result is %f", (num1+num2));
-                    break;
+            //Call Binary Operation Function.
+            binaryOperation(operator,num1,num2);
 
-                case '-' :
-                    // Calculate subtraction and print it.
-                    printf("The result is %f", (num1-num2));
-                    break;
-
-                case '*' :
-                    // Calculate product and print it.
-                    printf("The result is %f", (num1*num2));
-                    break;
-
-                    // Calculate Quotient and print it
-                case '/' :
-                    // Must make sure it is not trying to be divided by 0.
-                    if(num2!=0.00){
-                        printf("The result is %f", (num1/num2));
-                        break;
-                    } else{
-                        printf("You cannot divide by 0!");
-                        break;
-                    }
-                    // Calculate Remainder
-                case '%':
-                    printf("The result is %f", remainderf(num1,num2));
-                    break;
-
-                    // Calculate Power
-                case 'P':
-                    printf("The result is %f", pow(num1,num2));
-                    break;
-
-                    // Calculate Maximum
-                case 'X':
-                    printf("The result is %f", fmaxf(num1,num2));
-                    break;
-
-                    // Calculate Minimum
-                case 'I':
-                    printf("The result is %f", fminf(num1,num2));
-                    break;
-
-                    // Default case if user doesn't select one of the operators available.
-                default :
-                    printf("\nSorry I don't have enough knowledge to serve you at this time.");
-            }
             // If statement for option U
         } else if(userInput=='U'){
             float num;
@@ -152,12 +158,46 @@ int main() {
                     break;
 
             }
-            // If statement for option A
-        } else if(userInput=='A'){
-            printf("Sorry I don't have enough knowledge to serve you at this time.");
             // If statement for option V
         } else if(userInput=='V'){
-            printf("Sorry I don't have enough knowledge to serve you at this time.");
+            //Define user inputted variable and scan it.
+            char userVar;
+            printf("Enter a variable letter (a-e):");
+            scanf("%c", &userVar);
+
+            switch(userVar){
+                case 'a':
+                    printf("Enter a value for the variable %c",userVar);
+                    scanf("%f",&a);
+                    break;
+                case 'b':
+                    printf("Enter a value for the variable %c",userVar);
+                    scanf("%f",&b);
+                    break;
+                case 'c':
+                    printf("Enter a value for the variable %c",userVar);
+                    scanf("%f",&c);
+                    break;
+                case 'd':
+                    printf("Enter a value for the variable %c",userVar);
+                    scanf("%f",&d);
+                    break;
+                case 'e':
+                    printf("Enter a value for the variable %c",userVar);
+                    scanf("%f", &e);
+                    break;
+                default:
+                    printf("Invalid variable name!");
+            }
+
+            // If statement for option A
+        } else if(userInput=='A'){
+            char selection;
+            printf("Select an option (B; Binary Operation, U; Unary Operation, E; Exit):");
+            scanf("%c",&selection);
+            if(selection=='B'){
+
+            }
         }
 
     }
