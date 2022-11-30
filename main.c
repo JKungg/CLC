@@ -82,17 +82,14 @@ float binaryOperation(char operator, float num1, float num2){
     switch(operator){
         case '+' :
             // Calculate sum and print it.
-            printf("The result is %f", (num1+num2));
             return(num1+num2);
 
         case '-' :
             // Calculate subtraction and print it.
-            printf("The result is %f", (num1-num2));
             return(num1-num2);
 
         case '*' :
             // Calculate product and print it.
-            printf("The result is %f", (num1*num2));
             return(num1*num2);
 
             // Calculate Quotient and print it
@@ -102,26 +99,21 @@ float binaryOperation(char operator, float num1, float num2){
                 printf("Denominator cannot be 0, enter another number: ");
                 num2 = getNum();
             }
-            printf("The result is %f", (num1/num2));
             return(num1/num2);
             // Calculate Remainder
         case '%':
-            printf("The result is %f", remainderf(num1,num2));
             return(remainderf(num1,num2));
 
             // Calculate Power
         case 'P':
-            printf("The result is %f", pow(num1,num2));
             return(powf(num1,num2));
 
             // Calculate Maximum
         case 'X':
-            printf("The result is %f", fmaxf(num1,num2));
             return(fmaxf(num1,num2));
 
             // Calculate Minimum
         case 'I':
-            printf("The result is %f", fminf(num1,num2));
             return(fminf(num1,num2));
 
             // Default case if user doesn't select one of the operators available.
@@ -143,7 +135,6 @@ float unaryOperation(char operator, float num){
             }
             // Check to see if it is a positive number
             if(num >= 0){
-                printf("The result is: %f", sqrtf(num));
                 return(sqrtf(num));
             } else{
                 printf("You cannot get the squareroot of a negative number!");
@@ -156,27 +147,35 @@ float unaryOperation(char operator, float num){
                 printf("Number cannot be negative or zero, enter another number: ");
                 num = getNum();
             }
-                printf("The result is: %f", logf(num));
                 return logf(num);
 
             // Case for exponentiation
         case 'E':
-            printf("The result is: %f", expf(num));
             return expf(num);
 
             // Case for smallest integer value greater than or equal to x
         case 'C':
-            printf("The result is: %f", ceilf(num));
             return ceilf(num);
 
             // Case for largest integer value greater than or equal to x
         case 'F':
-            printf("The result is: %f", floorf(num));
             return floorf(num);
 
     }
 }
 
+char menuSelection(){
+    char userInput;
+    printf("\n----------------------------------------------------------"
+           "\nPlease select your option ( B , U , A , V , E ) : ");
+    // Read userInput
+    scanf("%s", &userInput);
+    while(toupper(userInput)!='B' && toupper(userInput)!='U' && toupper(userInput)!='A' && toupper(userInput)!='V' && toupper(userInput)!='E'){
+        printf("Invalid selection.\n Please select an option from the following menu ( B, U, A, V, E ):");
+        scanf("%s", &userInput);
+    }
+    return toupper(userInput);
+}
 
 int main() {
     // Declare Variable for UserInput
@@ -197,17 +196,14 @@ int main() {
            "E) - Exit\n");
 
     // While Loop to keep calculator running until user wants to exit.
-    while(toupper(userInput) != 'E'){
+    while(userInput != 'E'){
 
         // Show Option selection message
-        printf("\n----------------------------------------------------------"
-               "\nPlease select your option ( B , U , A , V , E ) : ");
-        // Read userInput
-        scanf("%s", &userInput);
+        userInput = menuSelection();
 
         // Convert userInput to uppercase.
         // If userInput is 'B'
-        if(toupper(userInput) == 'B'){
+        if(userInput == 'B'){
 
             // Declare required variables
             float num1, num2;
@@ -223,11 +219,13 @@ int main() {
             printf("Please enter the second number:");
             num2= getNum();
 
+            float result;
             //Call Binary Operation Function.
-            binaryOperation(op,num1,num2);
+            result = binaryOperation(op,num1,num2);
+            printf("The result is %f", result);
 
             // If statement for option U
-        } else if(toupper(userInput)=='U'){
+        } else if(userInput=='U'){
             //Declare required variables.
             float num;
             char op = 0;
@@ -239,12 +237,13 @@ int main() {
                 printf("\nEnter an operator...\nS for square root...\nL for logarithm (logx)...\nE for exponentiation (e!)...\nC for the smallest integer value greater than or equal to x...\nF for the largest integer value greater than or equal to x...: ");
                 scanf("%s", &op);
             }
-
+            float result;
             //Call Unary Operation Function.
-            unaryOperation(op,num);
+            result = unaryOperation(op,num);
+            printf("The result is %f", result);
 
             // If statement for option V
-        } else if(toupper(userInput)=='V'){
+        } else if(userInput=='V'){
             //Define user inputted variable and scan it.
             char userVar;
             printf("Enter a variable letter (a-e):");
@@ -281,14 +280,14 @@ int main() {
             }
 
             // If statement for option A
-        } else if(toupper(userInput)=='A'){
+        } else if(userInput=='A'){
             char selection = 0;
             while(toupper(selection)!='E'){
                 printf("\nSelect an option (B; Binary Operation, U; Unary Operation, E; Exit):");
                 scanf("%s",&selection);
 
                 // Advanced Binary Operations
-                if(toupper(selection)=='B'){
+                if(selection=='B'){
                     // Declare required variables
                     char op = 0;
                     float num1, num2;
@@ -304,12 +303,14 @@ int main() {
                     // Assign the value of the variable or number to num2
                     num2 = varOrNum();
 
+                    float result;
                     //Call Binary Operation Function.
-                    binaryOperation(op,num1,num2);
+                    result = binaryOperation(op,num1,num2);
+                    printf("The result is %f", result);
 
                 }
                 // Advanced Unary Operation
-                else if(toupper(selection)=='U'){
+                else if(selection=='U'){
                     //Declare required variables.
                     float num;
                     char op = 0, var = 0;
@@ -321,11 +322,14 @@ int main() {
                         printf("Enter an operator...\nS for square root...\nL for logarithm (logx)...\nE for exponentiation (e!)...\nC for the smallest integer value greater than or equal to x...\nF for the largest integer value greater than or equal to x...: ");
                         scanf("%s", &op);
                     }
+                    float result;
                     // Call unary operation
-                    unaryOperation(op,num);
+                    result = unaryOperation(op,num);
+                    printf("The result is %f",result);
                 }
             }
         }
     }
+    printf("Goodbye!");
     return 0;
 }
