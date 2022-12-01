@@ -26,6 +26,7 @@ float getNum(){
         printf("Invalid Input. Enter a number: ");
         scanf("%f", &num);
     }
+    fflush(stdin);
     return num;
 }
 
@@ -50,22 +51,26 @@ float varOrNum(){
     char in, varA;
     //Ask user if they want to input a variable or number
     printf("Would you like to input a variable(V) or a number(N)?: ");
-    scanf("%s", &in);
+    scanf("%c", &in);
+    fflush(stdin);
     // Loop until proper input is entered
     while(toupper(in)!='V'&& toupper(in)!='N'){
         printf("Invalid input, would you like to input a Variable(V) or Number(N)?: ");
-        scanf("%s", &in);
+        scanf("%c", &in);
+        fflush(stdin);
     }
 
     // Variable choice
     if(toupper(in)=='V'){
         //Get operator and variables from user.
         printf("Please enter the first variable:");
-        scanf("%s", &varA);
+        scanf("%c", &varA);
+        fflush(stdin);
         //Loop until proper input is entered.
         while(varA != 'a' && varA != 'b' && varA != 'c' && varA != 'd' && varA != 'e'){
             printf("Invalid variable. Enter a variable letter (a-e): ");
-            scanf("%s", &varA);
+            scanf("%c", &varA);
+            fflush(stdin);
         }
         return getVar(varA);
     }
@@ -125,7 +130,7 @@ float binaryOperation(char operator, float num1, float num2){
 // Function for Unary Operations
 float unaryOperation(char operator, float num){
     // Switch for the different possible operands.
-    switch(operator){
+    switch(toupper(operator)){
 
         // Case for square root.
         case 'S':
@@ -169,10 +174,12 @@ char menuSelection(){
     printf("\n----------------------------------------------------------"
            "\nPlease select your option ( B , U , A , V , E ) : ");
     // Read userInput
-    scanf("%s", &userInput);
+    scanf("%c", &userInput);
+    fflush(stdin);
     while(toupper(userInput)!='B' && toupper(userInput)!='U' && toupper(userInput)!='A' && toupper(userInput)!='V' && toupper(userInput)!='E'){
         printf("Invalid selection.\n Please select an option from the following menu ( B, U, A, V, E ):");
-        scanf("%s", &userInput);
+        scanf("%c", &userInput);
+        fflush(stdin);
     }
     return toupper(userInput);
 }
@@ -184,8 +191,8 @@ int main() {
     // Print Calculator Welcome Message
     printf("Welcome to my Command-Line Calculator (CLC)\n");
     printf("Developer: Jack Dilkens\n");
-    printf("Version: 2\n");
-    printf("Date: 2022-11-18\n");
+    printf("Version: 3\n");
+    printf("Date: 2022-11-30\n");
     printf("----------------------------------------------------------\n\n");
     // Calculator Main Menu
     printf("Select one of the following items:\n"
@@ -214,7 +221,8 @@ int main() {
             //Loop until proper input is entered.
             while(op!='+' && op!='-' && op!='*'&& op!='/' && op!='%' && op!= 'P' && op!='X' && op!='I'){
                 printf("Please enter the operation ( + , - , *, /, %%, P, X, I) :");
-                scanf("%s", &op);
+                scanf("%c", &op);
+                fflush(stdin);
             }
             printf("Please enter the second number:");
             num2= getNum();
@@ -235,7 +243,8 @@ int main() {
             //Loop until proper input is entered.
             while(op!='S' && op!='L' && op!='E'&& op!='C' && op!='F'){
                 printf("\nEnter an operator...\nS for square root...\nL for logarithm (logx)...\nE for exponentiation (e!)...\nC for the smallest integer value greater than or equal to x...\nF for the largest integer value greater than or equal to x...: ");
-                scanf("%s", &op);
+                scanf("%c", &op);
+                fflush(stdin);
             }
             float result;
             //Call Unary Operation Function.
@@ -247,11 +256,13 @@ int main() {
             //Define user inputted variable and scan it.
             char userVar;
             printf("Enter a variable letter (a-e):");
-            scanf("%s", &userVar);
+            scanf("%c", &userVar);
+            fflush(stdin);
             //Loop until proper input is entered.
             while(userVar != 'a' && userVar != 'b' && userVar != 'c' && userVar != 'd' && userVar != 'e'){
                 printf("Invalid variable. Enter a variable letter (a-e): ");
-                scanf("%s", &userVar);
+                scanf("%c", &userVar);
+                fflush(stdin);
             }
             // Switch for assigning a value to the variable.
             switch(userVar){
@@ -284,10 +295,11 @@ int main() {
             char selection = 0;
             while(toupper(selection)!='E'){
                 printf("\nSelect an option (B; Binary Operation, U; Unary Operation, E; Exit):");
-                scanf("%s",&selection);
+                scanf("%c",&selection);
+                fflush(stdin);
 
                 // Advanced Binary Operations
-                if(selection=='B'){
+                if(toupper(selection)=='B'){
                     // Declare required variables
                     char op = 0;
                     float num1, num2;
@@ -298,7 +310,8 @@ int main() {
                     //Loop until proper input is entered.
                     while(op!='+' && op!='-' && op!='*'&& op!='/' && op!='%' && op!= 'P' && op!='X' && op!='I'){
                         printf("Please enter the operation ( + , - , * , /, %%, P, X, I) :");
-                        scanf("%s", &op);
+                        scanf("%c", &op);
+                        fflush(stdin);
                     }
                     // Assign the value of the variable or number to num2
                     num2 = varOrNum();
@@ -310,7 +323,7 @@ int main() {
 
                 }
                 // Advanced Unary Operation
-                else if(selection=='U'){
+                else if(toupper(selection)=='U'){
                     //Declare required variables.
                     float num;
                     char op = 0, var = 0;
@@ -320,7 +333,8 @@ int main() {
 
                     while(op!='S' && op!='L' && op!='E'&& op!='C' && op!='F'){
                         printf("Enter an operator...\nS for square root...\nL for logarithm (logx)...\nE for exponentiation (e!)...\nC for the smallest integer value greater than or equal to x...\nF for the largest integer value greater than or equal to x...: ");
-                        scanf("%s", &op);
+                        scanf("%c", &op);
+                        fflush(stdin);
                     }
                     float result;
                     // Call unary operation
